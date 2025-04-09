@@ -1,0 +1,37 @@
+﻿@model Item
+@{
+    ViewData["Title"] = "Delete";
+}
+<form method="post" asp-action="Delete">
+    <div class="border p-3 mt-4">
+        <div class="row pb-2">
+            <h2 class="text-primary">Delete Item</h2>
+            <hr />
+        </div>
+        <div asp-validation-summary="All"></div>
+        <div class="mb-3">
+            <label asp-for="name"></label>
+            <input asp-for="name" disabled class="form-control" />
+        </div>
+        <div class="mb-3">
+            <label asp-for="price"></label>
+            <input asp-for="price" disabled class="form-control" />
+        </div>
+        <div>
+            <label asp-for="catogreyId"></label>
+            <select asp-for="catogreyId" disabled class="form-control" asp-items="@ViewBag.catogreyList">
+            </select>
+            <span asp-validation-for="catogreyId" class="text-danger"></span>
+        </div>
+
+        <br />
+        <hr />
+        <button type="submit" class="btn btn-primary" style="width:150px">Delete</button>
+        <a asp-action="Index" asp-controller="Item" class="btn btn-secondary" style="width:150px">
+            back to items
+        </a>
+    </div>
+</form>
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

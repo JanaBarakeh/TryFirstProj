@@ -1,0 +1,19 @@
+﻿ 
+@if (TempData["SuccessData"] != null)
+{
+    <h3 style="color:saddlebrown">
+        @TempData["SuccessData"]
+    </h3>
+    <script type="text/javascript">
+        toastr.success('@TempData["SuccessData"]', 'Success')
+        </script>
+}
+@if (TempData["ErrorData"] != null)
+{
+    <h3 style="color:red">
+        @TempData["ErrorData"]
+    </h3>
+    <script type="text/javascript">
+        toastr.error(' @TempData["ErrorData"]', 'Failed')
+    </script>
+}
