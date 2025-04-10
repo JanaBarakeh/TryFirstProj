@@ -3,17 +3,20 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using TryFirstProj.Data;
 using TryFirstProj.Models;
+using IHostingEnvironment = Microsoft.AspNetCore.Hosting.IHostingEnvironment;
 
 namespace TryFirstProj.Controllers
 {
     public class ItemController : Controller
     {
         private readonly AppDbContext _db;
-        public ItemController(AppDbContext db)
+        public ItemController(AppDbContext db ,IHostingEnvironment host)
         {
             _db = db;
+            _host = host;
         }
        
+        private readonly IHostingEnvironment _host;
         public IActionResult Index()
         {
             IEnumerable<Item> ItemList = _db.Items.Include(c => c.catogrey).ToList();
@@ -31,12 +34,24 @@ namespace TryFirstProj.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult New(Item item)
         {
+
             if (item.name == "100")
             {
                 ModelState.AddModelError("name", "Name cannot be 100");
             }
             if (ModelState.IsValid)
             {
+                // to upload image
+                string fileName =  string.Empty;
+                if (item.clientFile != null)
+                {
+                    string uploadDir = Path.Combine(_host.WebRootPath, "images");
+                    fileName=item.clientFile.FileName;
+                    string fullPath = Path.Combine(uploadDir, fileName);
+                    item.clientFile.CopyTo(new FileStream(fullPath, FileMode.Create));
+                    item.imagePath = fileName;
+
+                }
                 _db.Items.Add(item);
                 _db.SaveChanges();
                 TempData["SuccessData"] = "Add New Item Succsefly";

@@ -24,5 +24,10 @@ namespace TryFirstProj.Models
 
         public Catogrey? catogrey { get; set; }
 
+        public string? imagePath { get; set; }
+
+        [NotMapped]
+        public IFormFile clientFile { get; set; }
+
     }
 }

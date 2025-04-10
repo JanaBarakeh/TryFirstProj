@@ -15,6 +15,13 @@ namespace TryFirstProj.Repositry.Base
         Task<IEnumerable<T>> GetAllAsync();
         Task <IEnumerable<T>> FindAllAsync(params string[] agers);
 
+        void AddOne (T myItem);
+        void DeleteOne (T myItem);
+        void UpdateOne(T myItem);
+        void AddList(IEnumerable<T> myList);
+        void DeleteList(IEnumerable<T> myList);
+        void UpdateList(IEnumerable<T> myList);
+
 
     }
 }

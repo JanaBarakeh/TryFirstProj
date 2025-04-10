@@ -30,6 +30,9 @@
                     Catogrey
                 </th>
                 <th scope="col">
+                   Image
+                </th>
+                <th scope="col">
                 </th>
             </tr>
         </thead>
@@ -37,7 +40,7 @@
             @foreach (var item in Model)
             {
                 <tr class="table-primary">
-                    <td scope="row" width="30%">
+                    <td scope="row" width="20%">
                         @item.name
                     </td>
                     <td width="20%">
@@ -45,6 +48,9 @@
                     </td>
                     <td width="30%">
                         @item.catogrey.Name
+                    </td>
+                    <td width="30%">
+                       <img src="~/images/@item.imagePath" style="width:55px" class="img-thumbnail"/>
                     </td>
                     <td>
                         <a asp-controller="Item" asp-action="Edit" asp-route-id="@item.id" class="btn btn-success">

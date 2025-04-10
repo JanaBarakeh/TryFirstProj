@@ -1,4 +1,4 @@
-﻿@model Item
+﻿@model Catogrey
 @{
     ViewData["Title"] = "New";
 }
@@ -6,25 +6,14 @@
 <form method="post" enctype="multipart/form-data">
     <div class="border p-3 mt-4">
         <div class="row pb-2">
-            <h2 class="text-primary">Add New Item</h2>
+            <h2 class="text-primary">Add New catogrey</h2>
             <hr />
         </div>
         <div asp-validation-summary="All"></div>
         <div class="mb-3">
-            <label asp-for="name"></label>
-            <input asp-for="name" class="form-control" />
-            <span asp-validation-for="name" class="text-danger"></span>
-        </div>
-        <div class="mb-3">
-            <label asp-for="price"></label>
-            <input asp-for="price" class="form-control" />
-            <span asp-validation-for="price" class="text-danger"></span>
-        </div>
-        <div>
-            <label asp-for="catogreyId"></label>
-            <select asp-for="catogreyId" class="form-control" asp-items="@ViewBag.catogreyList">
-            </select>
-            <span asp-validation-for="catogreyId" class="text-danger"></span>
+            <label asp-for="Name"></label>
+            <input asp-for="Name" class="form-control" />
+            <span asp-validation-for="Name" class="text-danger"></span>
         </div>
         <div>
             <input type="file" asp-for="clientFile" onchange="loadFile(event)" />
@@ -35,8 +24,8 @@
         <hr />
 
         <button type="submit" class="btn btn-primary" style="width:150px">Save</button>
-        <a asp-action="Index" asp-controller="Item" class="btn btn-secondary" style="width:150px">
-            back to items
+        <a asp-action="Index" asp-controller="Catogrey" class="btn btn-secondary" style="width:150px">
+            back to Catogreys
         </a>
     </div>
 </form>
@@ -53,3 +42,5 @@
         }
     </script>
 }
+
+

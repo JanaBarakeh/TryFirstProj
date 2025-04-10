@@ -12,7 +12,8 @@ builder.Services.AddDbContext<AppDbContext>(options=>options.UseSqlServer(
     builder.Configuration.GetConnectionString("MyConnection")
     ));
 // Add services to the Repositry.
-builder.Services.AddTransient(typeof(IRepositry<>), typeof(MainRepositry<>));
+//builder.Services.AddTransient(typeof(IRepositry<>), typeof(MainRepositry<>));
+builder.Services.AddTransient<IUnitOfWork, UnitOfWork>();
 
 var app = builder.Build();
 
