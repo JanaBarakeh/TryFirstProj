@@ -2,6 +2,7 @@ using Microsoft.EntityFrameworkCore;
 using TryFirstProj.Data;
 using TryFirstProj.Repositry;
 using TryFirstProj.Repositry.Base;
+using Microsoft.AspNetCore.Identity;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -11,6 +12,8 @@ builder.Services.AddControllersWithViews();
 builder.Services.AddDbContext<AppDbContext>(options=>options.UseSqlServer(
     builder.Configuration.GetConnectionString("MyConnection")
     ));
+
+builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true).AddEntityFrameworkStores<AppDbContext>();
 // Add services to the Repositry.
 //builder.Services.AddTransient(typeof(IRepositry<>), typeof(MainRepositry<>));
 builder.Services.AddTransient<IUnitOfWork, UnitOfWork>();
@@ -39,5 +42,7 @@ app.MapControllerRoute(
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
+
+app.UseEndpoints(endpoints =>endpoints.MapRazorPages());
 
 app.Run();
